@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32228.343
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppleStore", "AppleStore\AppleStore.csproj", "{38395FC8-0EF1-437B-8144-F03F8F77D826}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DAL", "DAL", "{6FD1DD7B-BC79-4EF4-9483-65E815226496}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{9CE38E85-1CFC-4953-BB84-62F04ED9B581}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service", "Service", "{F41EFAC9-F9ED-4FA8-B478-D54CE56094A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppleStore.DAL", "AppleStore.DAL\AppleStore.DAL.csproj", "{95C79E5F-0281-41E1-B49B-EA2FD10CD96E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppleStore.Domain", "AppleStore.Domain\AppleStore.Domain.csproj", "{34C17E91-2321-4361-ADEE-185B356C8811}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppleStore.Service", "AppleStore.Service\AppleStore.Service.csproj", "{319BE22B-24C3-4D93-A2A5-026627558353}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{38395FC8-0EF1-437B-8144-F03F8F77D826}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38395FC8-0EF1-437B-8144-F03F8F77D826}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38395FC8-0EF1-437B-8144-F03F8F77D826}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38395FC8-0EF1-437B-8144-F03F8F77D826}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95C79E5F-0281-41E1-B49B-EA2FD10CD96E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95C79E5F-0281-41E1-B49B-EA2FD10CD96E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95C79E5F-0281-41E1-B49B-EA2FD10CD96E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95C79E5F-0281-41E1-B49B-EA2FD10CD96E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34C17E91-2321-4361-ADEE-185B356C8811}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34C17E91-2321-4361-ADEE-185B356C8811}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34C17E91-2321-4361-ADEE-185B356C8811}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34C17E91-2321-4361-ADEE-185B356C8811}.Release|Any CPU.Build.0 = Release|Any CPU
+		{319BE22B-24C3-4D93-A2A5-026627558353}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{319BE22B-24C3-4D93-A2A5-026627558353}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{319BE22B-24C3-4D93-A2A5-026627558353}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{319BE22B-24C3-4D93-A2A5-026627558353}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{95C79E5F-0281-41E1-B49B-EA2FD10CD96E} = {6FD1DD7B-BC79-4EF4-9483-65E815226496}
+		{34C17E91-2321-4361-ADEE-185B356C8811} = {9CE38E85-1CFC-4953-BB84-62F04ED9B581}
+		{319BE22B-24C3-4D93-A2A5-026627558353} = {F41EFAC9-F9ED-4FA8-B478-D54CE56094A0}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1ED44B1F-5ACB-4ABE-8218-788AC30BF4D2}
+	EndGlobalSection
+EndGlobal

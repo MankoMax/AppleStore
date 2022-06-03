@@ -1,0 +1,48 @@
+﻿@using AppleStore.Domain.ViewModels.Product
+@model List<AppleStore.Domain.Entity.Product>
+
+@{ ViewBag.Title = "Product List";
+    Layout = "_Layout"; }
+<link rel="stylesheet" href="~/css/styles.css" />
+<!-- Header-->
+<header class="bg-dark py-5">
+    <div class="container px-3 px-lg-3 my-3">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Apple Products</h1>
+            <p class="lead fw-normal text-white-50 mb-0">You can buy everything On-Line</p>
+        </div>
+    </div>
+</header>
+<!-- Section-->
+
+<section class="py-5">
+    <div class="container px-md-2 px-lg-2 mt-2">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            @foreach (var product in Model)
+            {
+<div class="col mb-5">
+    <div class="card h-100">
+        <!-- Product image-->
+        <img class="card-img-top" src="https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP705/SP705-iphone_6-mul.png" alt="..." />
+        <!-- Product details-->
+        <div class="card-body p-4">
+            <div class="text-center">
+                @product.Description
+                <!-- Product name-->
+                <h5 class="fw-bolder">@product.Name</h5>
+                <!-- Product price-->
+                $@product.Price
+            </div>
+        </div>
+        <!-- Product actions-->
+        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a>
+            @if (User.IsInRole("Admin")) { <a class="btn btn-outline-dark mt-auto" asp-controller="Product" asp-action="DeleteProduct" asp-route-id="@product.Id">Delete</a>}
+            </div>
+        </div>
+    </div>
+</div>}
+        </div>
+    </div>
+</section>
+

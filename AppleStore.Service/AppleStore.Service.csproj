@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AppleStore.DAL\AppleStore.DAL.csproj" />
+    <ProjectReference Include="..\AppleStore.Domain\AppleStore.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

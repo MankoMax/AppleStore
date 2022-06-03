@@ -1,0 +1,47 @@
+﻿@model AppleStore.Domain.ViewModels.Product.ProductViewModel
+
+<title>@ViewData["Title"] - AppleStore</title>
+<link rel="stylesheet" href="~/css/styles.css" />
+
+<div style="padding: 20px;"></div>
+
+<section class="vh-100">
+    <div class="container-fluid h-custom">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-md-9 col-lg-6 col-xl-5">
+
+                <img src="https://www.cnet.com/a/img/resize/fa30df0ab174346771eef6924905c91bbfcb55ca/hub/2014/09/13/38d0b3b2-a123-4912-b950-9ea8aa18b6ba/xerxes-1708-033.jpg?auto=webp&width=768"
+                     class="img-fluid" alt="Sample image">
+            </div>
+            <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                <form asp-controller="Product" asp-action="Create">
+
+                    <div class="form-outline mb-4">
+                        <input asp-for="Name" id="form3Example3" class="form-control form-control-lg"
+                               placeholder="Enter your product name" type="text" />
+                        <label class="form-label" for="form3Example3">   Name</label>
+                    </div>
+
+                    <div class="form-outline mb-3">
+                        <input asp-for="Price" id="form3Example4" class="form-control form-control-lg"
+                               placeholder="Enter product price" type="text" />
+                        <label class="form-label" for="form3Example4">   Price</label>
+                    </div>
+
+                    <div class="form-outline mb-3">
+                        <input asp-for="Description" id="form3Example4" class="form-control form-control-lg"
+                               placeholder="Information about product" type="text" />
+                        <label class="form-label" for="form3Example4" rows="4">   Description</label>
+                    </div>
+
+
+                    <div class="text-center text-lg-start mt-4 pt-2">
+                        <button class="btn btn-success btn-lg float-right" type="submit">Create</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+</section>
