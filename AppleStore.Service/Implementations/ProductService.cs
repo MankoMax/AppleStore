@@ -24,11 +24,20 @@ namespace AppleStore.Service.Implementations
         {
             try
             {
+                var myImageDict = new Dictionary<string, string>
+            {
+                { "iPhone 6", "https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP705/SP705-iphone_6-mul.png" },
+                { "iPhone 7", "https://bigmag.ua/image/cache/catalog/archive/data/1c-iphone-7/black2year-650x540.png" },
+                { "iPhone 8", "https://swipe.ua/content/images/23/335x390l50nn0/aktivirovannyy-apple-iphone-8-64gb-gold-mq6m2id-57658101470531.png" }
+            };
+                var productImage = myImageDict.GetValueOrDefault(model.Name);
+
                 var product = new Product()
                 {
                     Name = model.Name,
                     Description = model.Description,
                     Price = model.Price,
+                    Image = productImage,
                 };
 
                 await _productRepository.Create(product);

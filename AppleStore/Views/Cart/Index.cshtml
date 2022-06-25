@@ -1,0 +1,43 @@
+﻿@model AppleStore.Domain.ViewModels.CartIndexViewModel
+@using AppleStore.Domain.ViewModels.Product
+
+@{
+    ViewBag.Title = "AppleStore: ваша корзина";
+}
+
+<h2>Ваша корзина</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Кол-во</th>
+            <th>Игра</th>
+            <th class="text-right">Цена</th>
+            <th class="text-right">Общая цена</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var line in Model.Cart.Lines)
+        {
+            <tr>
+                <td class="text-center">@line.Quantity</td>
+                <td class="text-left">@line.Product.Name</td>
+                <td class="text-right">$ @line.Product.Price</td>
+                <td class="text-right">
+                    @((line.Quantity * line.Product.Price).ToString("$ #"))
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3" class="text-right">Итого:</td>
+            <td class="text-right">
+                @Model.Cart.ComputeTotalValue().ToString("$ #")
+            </td>
+        </tr>
+    </tfoot>
+</table>
+
+<div class="text-center">
+    <a class="btn btn-primary" asp-controller="Product" asp-action="GetProducts">Продолжить покупки</a>
+</div>

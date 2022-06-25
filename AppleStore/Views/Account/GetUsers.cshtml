@@ -1,7 +1,6 @@
-﻿@using AppleStore.Domain.ViewModels.Product
-@model List<AppleStore.Domain.Entity.Product>
+﻿@model List<AppleStore.Domain.Entity.User>
 
-@{ ViewBag.Title = "Product List";
+@{ ViewBag.Title = "User List";
     Layout = "_Layout"; }
 <link rel="stylesheet" href="~/css/styles.css" />
 <!-- Header-->
@@ -20,32 +19,33 @@
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             @if (Model.Any())
             {
-                foreach (var product in Model)
+                foreach (var user in Model)
                 {
 <div class="col mb-5">
     <div class="card h-100">
         <!-- Product image-->
-        <img class="card-img-top" src="@product.Image" alt="..." />
+        <img class="card-img-top" src="https://www.nicepng.com/png/detail/136-1366211_group-of-10-guys-login-user-icon-png.png" alt="..." />
         <!-- Product details-->
         <div class="card-body p-4">
             <div class="text-center">
-                @product.Description
+                Login
                 <!-- Product name-->
-                <h5 class="fw-bolder">@product.Name</h5>
+                <h5 class="fw-bolder">@user.Name</h5>
                 <!-- Product price-->
-                $@product.Price
+                Password
+                <h5 class="fw-bolder">@user.Password</h5>
             </div>
         </div>
         <!-- Product actions-->
         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-            <div class="text-center"><a class="btn btn-outline-dark mt-auto" asp-controller="Cart" asp-action="AddToCart" asp-route-id="@product.Id">Add to cart</a>
-            @if (User.IsInRole("Admin"))
-            { <a class="btn btn-outline-dark mt-auto" asp-controller="Product" asp-action="DeleteProduct" asp-route-id="@product.Id">Delete</a>}
+            <div class="text-center">
+                @if (User.IsInRole("Admin"))
+                {<a class="btn btn-outline-dark mt-auto" asp-controller="Account" asp-action="DeleteUser" asp-route-id="@user.Id">Delete</a>}
             </div>
         </div>
     </div>
 </div>}
-            }
+}
         </div>
     </div>
 </section>

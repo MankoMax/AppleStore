@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@*@model AppleStore.Domain.ViewModels.CartIndexViewModel*@
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -24,8 +26,7 @@
                     <li class="nav-item"><a class="nav-link active" aria-current="page" asp-controller="Home" asp-action="Index">Home</a></li>
                     @if (User.Identity.IsAuthenticated)
                     {
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" asp-controller="Product" asp-action="GetProducts">Store</a></li>
-                    }
+        <li class="nav-item"><a class="nav-link active" aria-current="page" asp-controller="Product" asp-action="GetProducts">Store</a></li>}
                     <li class="nav-item dropdown">
                         @if (!User.Identity.IsAuthenticated)
                         {
@@ -40,10 +41,11 @@
                         @if (User.IsInRole("Admin"))
                         {
             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Manage</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" asp-controller="Product" asp-action="GetProducts">Products List</a></li>
-                                <li><a class="dropdown-item" asp-controller="Product" asp-action="Create">Create New One</a></li>
-                            </ul>}
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" asp-controller="Product" asp-action="GetProducts">Products List</a></li>
+                <li><a class="dropdown-item" asp-controller="Product" asp-action="Create">Create New One</a></li>
+                <li><a class="dropdown-item" asp-controller="Account" asp-action="GetUsers">Users List</a></li>
+            </ul>}
                     </li>
                 </ul>
 
@@ -55,7 +57,14 @@
             Log Out
 
         </button>
-    </form>}
+    </form>
+                    <form class="d-flex" asp-controller="Cart" asp-action="Index">
+                        <button class="btn btn-outline-dark" type="submit">
+                            <i class="bi-cart-fill me-1"></i>
+                            Cart
+                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                        </button>
+                    </form>}
 
             </div>
         </div>
