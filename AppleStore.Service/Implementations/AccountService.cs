@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AppleStore.DAL.Interfaces;
@@ -116,6 +117,68 @@ namespace AppleStore.Service.Implementations
             };
             return new ClaimsIdentity(claims, "ApplicationCookie",
                 ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
+        }
+
+        public IBaseResponse<List<User>> GetUsers()
+        {
+            try
+            {
+                var users = _userRepository.GetAll().ToList();
+
+                if (!users.Any())
+                {
+                    return new BaseResponse<List<User>>()
+                    {
+                        Description = "No Elements",
+                        StatusCode = StatusCode.OK
+                    };
+                }
+
+                return new BaseResponse<List<User>>()
+                {
+                    Data = users,
+                    StatusCode = StatusCode.OK
+                };
+            }
+            catch (Exception ex)
+            {
+                return new BaseResponse<List<User>>()
+                {
+                    Description = $"[GetUsers] : {ex.Message}",
+                    StatusCode = StatusCode.InternalServerError
+                };
+            }
+        }
+
+        public async Task<IBaseResponse<User>> DeleteUser(int id)
+        {
+            var baseResponse = new BaseResponse<User>();
+
+            try
+            {
+                var user = _userRepository.GetAll().FirstOrDefault(x => x.Id == id);
+
+                if (user == null)
+                {
+                    baseResponse.StatusCode = StatusCode.InternalServerError;
+
+                    return baseResponse;
+                }
+
+                await _userRepository.Delete(user);
+
+                baseResponse.StatusCode = StatusCode.OK;
+
+                return baseResponse;
+            }
+            catch (Exception ex)
+            {
+                return new BaseResponse<User>()
+                {
+                    Description = $"[DeleteUser] : {ex.Message}",
+                    StatusCode = StatusCode.InternalServerError
+                };
+            }
         }
     }
 }

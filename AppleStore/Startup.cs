@@ -1,7 +1,9 @@
+using AppleStore.Controllers;
 using AppleStore.DAL;
 using AppleStore.DAL.Interfaces;
 using AppleStore.DAL.Repositories;
 using AppleStore.Domain.Entity;
+using AppleStore.DAL.Infrastructure;
 using AppleStore.Service.Implementations;
 using AppleStore.Service.Interfaces;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -11,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace AppleStore
 {
@@ -30,6 +33,15 @@ namespace AppleStore
             var connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connection));
+
+            services.AddHttpContextAccessor();
+
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+            });
 
             services.AddScoped<IBaseRepository<Product>, ProductRepository>();
             services.AddScoped<IBaseRepository<User>, UserRepository>();
@@ -56,7 +68,7 @@ namespace AppleStore
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
-
+            app.UseSession();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

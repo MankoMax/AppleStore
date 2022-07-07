@@ -24,11 +24,25 @@ namespace AppleStore.Service.Implementations
         {
             try
             {
+                var myImageDict = new Dictionary<string, string>
+            {
+                { "iPhone 6", "https://htstatic.imgsmail.ru/pic_image/fce72fb5490493da10584d6add4d49e4/450/450/1334887/" },
+                { "iPhone 7", "https://bigmag.ua/image/cache/catalog/archive/data/1c-iphone-7/black2year-650x540.png" },
+                { "iPhone 8", "https://a-mad.ru/wp-content/uploads/2017/10/iphone-8plus-spacegray.jpg" },
+                { "iPhone X", "https://zhzh.info/_pu/107/83911675.jpg" },
+                { "iPhone XS", "https://assets.swappie.com/cdn-cgi/image/width=600,height=600,fit=contain,format=auto/swappie-iphone-xs-max-gold.png" },
+                { "iPhone 11", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyIadKIf7W7o6Dcj8oKKPOXvR0v2KUgwcpGoDllJKPNvsLLtakZQrAN-pxfZoL1EBCA4I&usqp=CAU" },
+                { "iPhone 12", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0EqK7iHACiRMkP29XGjSgGb4eCLeH6sL-7e3-53fL-yAw9Px6V_BhP_3eKJNyVn16iCo&usqp=CAU" },
+                { "iPhone 13", "https://cdn1.it4profit.com/AfrOrF3gWeDA6VOlDG4TzxMv39O7MXnF4CXpKUwGqRM/resize:fill:540/bg:f6f6f6/q:100/plain/s3://catalog-products/210915083530651364/210927160010235057.png@webp" },
+            };
+                var productImage = myImageDict.GetValueOrDefault(model.Name);
+
                 var product = new Product()
                 {
                     Name = model.Name,
                     Description = model.Description,
                     Price = model.Price,
+                    Image = productImage,
                 };
 
                 await _productRepository.Create(product);
