@@ -3,6 +3,7 @@ using AppleStore.DAL;
 using AppleStore.DAL.Interfaces;
 using AppleStore.DAL.Repositories;
 using AppleStore.Domain.Entity;
+using AppleStore.DAL.Infrastructure;
 using AppleStore.Service.Implementations;
 using AppleStore.Service.Interfaces;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -39,9 +40,7 @@ namespace AppleStore
 
             services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromSeconds(10);
-                options.Cookie.HttpOnly = true;
-                options.Cookie.IsEssential = true;
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
             });
 
             services.AddScoped<IBaseRepository<Product>, ProductRepository>();
@@ -69,11 +68,9 @@ namespace AppleStore
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
-
+            app.UseSession();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
-            app.UseSession();
 
             app.UseRouting();
 

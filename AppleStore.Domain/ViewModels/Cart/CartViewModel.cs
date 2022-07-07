@@ -7,8 +7,10 @@ using AppleStore.Domain.Entity;
 
 namespace AppleStore.Domain.ViewModels
 {
-    public class CartIndexViewModel
+    public class CartViewModel
     {
-        public Cart Cart { get; set; }
+        public List<CartItem> CartItems { get; set; }
+        public decimal GrandTotal { get; set; }
     }
 }
+

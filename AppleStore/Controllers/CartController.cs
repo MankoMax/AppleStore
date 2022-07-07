@@ -1,85 +1,113 @@
 ﻿using AppleStore.Domain.Entity;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using AppleStore.DAL.Infrastructure;
 using AppleStore.Domain.ViewModels;
 using AppleStore.DAL.Interfaces;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using AppleStore.Service.Interfaces;
+using System.Text.Json.Serialization;
+using System;
 
 namespace AppleStore.Controllers
 {
     public class CartController : Controller
     {
-        private IBaseRepository<Product> _productRepository;
+        private readonly IBaseRepository<Product> _productRepository;
 
         public CartController(IBaseRepository<Product> productRepository)
         {
             _productRepository = productRepository;
         }
 
-        public ViewResult Index()
+        public IActionResult Index()
         {
-            return View(new CartIndexViewModel
-            {
-                Cart = GetCart()
-            });
-        }
+                var cart = HttpContext.Session.Get<List<CartItem>>("Cart") ?? new List<CartItem>();
 
-        public IActionResult AddToCart(int productId)
-        {
-            var product = _productRepository.GetAll()
-                .FirstOrDefault(x => x.Id == productId);
-
-            if (product != null)
-            {
-                GetCart().AddItem(product, 1);
-            }
-
-            return RedirectToAction("Index");
-        }
-
-        public IActionResult RemoveFromCart(int productId)
-        {
-            var product = _productRepository.GetAll()
-                .FirstOrDefault(g => g.Id == productId);
-
-            if (product != null)
-            {
-                GetCart().RemoveLine(product);
-            }
-
-            return RedirectToAction("Index");
-        }
-
-        public Cart GetCart()
-        {
-            return new Cart();
-        }
-
-        /*        public Cart GetCart()
+                CartViewModel cartVM = new()
                 {
-                    Cart cart = (Cart)Session["Cart"];
+                    CartItems = cart,
+                    GrandTotal = cart.Sum(x => x.Quantity * x.Price)
+                };
 
-                    if (cart == null)
-                    {
-                        cart = new Cart();
-                        Session["Cart"] = cart;
-                    }
-                    return cart;
-                }
-        */
-        /*  public async Cart GetCart()
-          {
-              var cart = new Cart();
+                return View(cartVM);
+        }
 
-              var key = string.Empty;
+        public IActionResult Add(long id)
+        {
+            var product = _productRepository.GetAll().FirstOrDefault(x => x.Id == id);
 
-              await _session.LoadAsync();
+            var cart = HttpContext.Session.Get<List<CartItem>>("Cart") ?? new List<CartItem>();
 
-              var bytes = _session.Get(key);
+            var cartItem = cart.Where(c => c.ProductId == id).FirstOrDefault();
 
-              _session.Set("Cart", bytes);
+            if (cartItem == null)
+            {
+                cart.Add(new CartItem(product));
+            }
+            else
+            {
+                cartItem.Quantity += 1;
+            }
 
-              return cart;
+            HttpContext.Session.Set("Cart", cart);
 
-          }*/
+            return Redirect(Request.Headers["Referer"].ToString());
+        }
+
+        public IActionResult Decrease(long id)
+        {
+            var cart = HttpContext.Session.Get<List<CartItem>>("Cart");
+
+            var cartItem = cart.Where(c => c.ProductId == id).FirstOrDefault();
+
+            if (cartItem.Quantity > 1)
+            {
+                --cartItem.Quantity;
+            }
+            else
+            {
+                cart.RemoveAll(p => p.ProductId == id);
+            }
+
+            if (cart.Count == 0)
+            {
+                HttpContext.Session.Remove("Cart");
+            }
+            else
+            {
+                HttpContext.Session.Set("Cart", cart);
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Remove(long id)
+        {
+            var cart = HttpContext.Session.Get<List<CartItem>>("Cart");
+
+            cart.RemoveAll(p => p.ProductId == id);
+
+            if (cart.Count == 0)
+            {
+                HttpContext.Session.Remove("Cart");
+            }
+            else
+            {
+                HttpContext.Session.Set("Cart", cart);
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Clear()
+        {
+            HttpContext.Session.Remove("Cart");
+
+            return RedirectToAction("Index");
+        }
     }
+
 }

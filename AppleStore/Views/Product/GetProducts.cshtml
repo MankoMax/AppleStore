@@ -1,5 +1,4 @@
-﻿@using AppleStore.Domain.ViewModels.Product
-@model List<AppleStore.Domain.Entity.Product>
+﻿@model List<AppleStore.Domain.Entity.Product>
 
 @{ ViewBag.Title = "Product List";
     Layout = "_Layout"; }
@@ -38,7 +37,7 @@
         </div>
         <!-- Product actions-->
         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-            <div class="text-center"><a class="btn btn-outline-dark mt-auto" asp-controller="Cart" asp-action="AddToCart" asp-route-id="@product.Id">Add to cart</a>
+            <div class="text-center"><a class="btn btn-outline-dark mt-auto" asp-controller="Cart" asp-action="Add" asp-route-id="@product.Id">Add to cart</a>
             @if (User.IsInRole("Admin"))
             { <a class="btn btn-outline-dark mt-auto" asp-controller="Product" asp-action="DeleteProduct" asp-route-id="@product.Id">Delete</a>}
             </div>

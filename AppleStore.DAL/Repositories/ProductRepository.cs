@@ -10,8 +10,6 @@ namespace AppleStore.DAL.Repositories
     {
         private readonly ApplicationDbContext _db;
 
-        // public delegate void ExecuteOperationWithSaveChanges();
-
         public ProductRepository(ApplicationDbContext db)
         {
             _db = db;

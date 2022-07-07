@@ -1,4 +1,6 @@
-﻿namespace AppleStore.Domain.ViewModels.Product
+﻿using System.Collections.Generic;
+
+namespace AppleStore.Domain.ViewModels.Product
 {
     public class ProductViewModel
     {
@@ -11,5 +13,7 @@
         public int Price { get; set; }
 
         public string Image { get; set; }
+
+        public List<string> Names { get; set; }
     }
 }
